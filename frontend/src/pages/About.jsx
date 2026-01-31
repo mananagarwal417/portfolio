@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { FaReact, FaNodeJs, FaDatabase } from "react-icons/fa";
 import { SiMongodb, SiTailwindcss, SiJavascript, SiAdobephotoshop } from "react-icons/si";
+import { FaProjectDiagram } from "react-icons/fa";
 import {  HiDownload } from "react-icons/hi";
 
 function About() {
@@ -60,6 +61,7 @@ function About() {
             { icon: <SiJavascript className="text-yellow-400 text-4xl" />, label: "JavaScript" },
             { icon: <FaDatabase className="text-gray-400 text-4xl" />, label: "Databases" },
             { icon: <SiAdobephotoshop className="text-blue-400 text-4xl" />, label: "Photoshop" },
+            { icon: <FaProjectDiagram className="text-cyan-400 text-4xl" />, label: "System Design" }
           ].map((skill, index) => (
             <motion.div
               key={index}
