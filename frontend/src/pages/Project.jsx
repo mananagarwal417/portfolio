@@ -46,6 +46,7 @@ function Project() {
               link="https://manan-agarwal.vercel.app/"
             />
             </motion.div>
+
             <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
@@ -54,13 +55,27 @@ function Project() {
             transition={{ duration: 0.6 }}
           >
            <ProjectCard
-              title="Chatting Application"
+              title="Connect"
               description="A chatting web application."
               tech={['React', 'JavaScript', 'Socket.io', 'MongoDB']}
-              link="https://chatting-app-w172.vercel.app/"
+              link="https://chatting-application-olive.vercel.app/"
             />
            </motion.div>
-          
+
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6 }}
+          >
+           <ProjectCard
+              title="SystemCraft"
+              description="A system design visualizer."
+              tech={['React', 'JavaScript', 'OpenAI.API', 'MongoDB' , 'ReactFlow']}
+              link="https://system-architect-psi.vercel.app/"
+            />
+           </motion.div>
 
           
         </motion.div>

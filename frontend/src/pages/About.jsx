@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { FaReact, FaNodeJs, FaDatabase } from "react-icons/fa";
 import { SiMongodb, SiTailwindcss, SiJavascript, SiAdobephotoshop } from "react-icons/si";
-import { HiDownload } from "react-icons/hi";
+import {  HiDownload } from "react-icons/hi";
 
 function About() {
   return (
