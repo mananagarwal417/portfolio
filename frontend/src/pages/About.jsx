@@ -83,7 +83,7 @@ function About() {
       >
         <div className="flex justify-center">
           <a 
-            href="/Manan_Agarwal_Resume.pdf" 
+            href="/Manan_Agarwal.pdf" 
             download
             className="flex justify-center items-center space-x-5 w-60 border-2 border-cyan-500 text-white px-6 py-3 rounded-lg font-mono font-bold hover:scale-105 transition-transform"
           >
