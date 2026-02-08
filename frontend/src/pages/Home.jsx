@@ -462,7 +462,7 @@ function Home() {
 
       <div className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-40 pt-32 space-y-40 pb-20">
         
-        {/* --- SECTION 1: HERO --- */}
+        {/* SECTION 1: HERO */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="hero-text space-y-8">
             <div ref={codeBlockRef} className="relative group inline-block w-full max-w-md">
@@ -505,73 +505,75 @@ function Home() {
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: SCREEN-SPLIT INTERACTIVE REVEAL --- */}
-        <section className="scroll-section relative h-[600px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
+        {/* --- UPDATED CODE BOUNDARY: SLIDING PHOTO & STATIONARY TEXT --- */}
+        <section className="scroll-section relative h-[650px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
           
-          {/* Left Interaction Area */}
+          {/* Interaction Area Overlays */}
           <div 
             onMouseEnter={() => setHoveredSide('left')}
             onMouseLeave={() => setHoveredSide(null)}
-            className="flex-1 z-40 cursor-pointer"
+            className="absolute inset-y-0 left-0 w-1/2 z-50 cursor-pointer"
           />
-
-          {/* Right Interaction Area */}
           <div 
             onMouseEnter={() => setHoveredSide('right')}
             onMouseLeave={() => setHoveredSide(null)}
-            className="flex-1 z-40 cursor-pointer"
+            className="absolute inset-y-0 right-0 w-1/2 z-50 cursor-pointer"
           />
 
-          {/* BACKGROUND TEXT LAYER (STATIONARY) */}
-          <div className="absolute inset-0 flex items-center pointer-events-none">
-            {/* Left Text */}
-            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-0 translate-x-[-20px]' : 'opacity-100'}`}>
+          {/* Left Panel (Designer Side) */}
+          <motion.div 
+            animate={{ width: hoveredSide === 'left' ? '75%' : hoveredSide === 'right' ? '25%' : '50%' }}
+            transition={{ type: "spring", stiffness: 150, damping: 20 }}
+            className="relative h-full overflow-hidden flex items-center justify-end border-r border-white/10"
+          >
+            {/* Stationary Background Text (Fixed to Viewport) */}
+            <div 
+              className={`absolute left-[15%] w-[400px] text-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
+            >
               <h2 className="text-7xl font-black tracking-tighter text-white">DESIGNER</h2>
-              <p className="text-cyan-500 font-bold tracking-[0.3em] mt-2">UI / UX ARCHITECT</p>
+              <p className="text-cyan-500 font-bold tracking-[0.4em] mt-3">UI / UX ARCHITECT</p>
             </div>
-            
-            {/* Right Text */}
-            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-0 translate-x-[20px]' : 'opacity-100'}`}>
+
+            {/* Sliding Photo Half (Left) - Anchored to the moving split point */}
+            <div className="relative w-[300px] h-[550px] flex-shrink-0 z-20">
+              <img 
+                src={image} 
+                className="absolute right-0 w-[600px] h-full object-cover grayscale transition-all duration-700" 
+                style={{ 
+                  clipPath: 'inset(0 50% 0 0)',
+                  filter: hoveredSide === 'left' ? 'grayscale(0%)' : 'grayscale(100%) brightness(0.3)'
+                }} 
+              />
+            </div>
+          </motion.div>
+
+          {/* Right Panel (Coder Side) */}
+          <motion.div 
+            animate={{ width: hoveredSide === 'right' ? '75%' : hoveredSide === 'left' ? '25%' : '50%' }}
+            transition={{ type: "spring", stiffness: 150, damping: 20 }}
+            className="relative h-full overflow-hidden flex items-center justify-start"
+          >
+            {/* Sliding Photo Half (Right) - Anchored to the moving split point */}
+            <div className="relative w-[300px] h-[550px] flex-shrink-0 z-20">
+              <img 
+                src={image} 
+                className="absolute left-0 w-[600px] h-full object-cover grayscale transition-all duration-700" 
+                style={{ 
+                  clipPath: 'inset(0 0 0 50%)',
+                  filter: hoveredSide === 'right' ? 'grayscale(0%)' : 'grayscale(100%) brightness(0.3)'
+                }} 
+              />
+            </div>
+
+            {/* Stationary Background Text (Fixed to Viewport) */}
+            <div 
+              className={`absolute right-[15%] w-[400px] text-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
+            >
               <h2 className="text-7xl font-black tracking-tighter text-white">&lt;CODER&gt;</h2>
-              <p className="text-purple-500 font-bold tracking-[0.3em] mt-2">FULL STACK DEV</p>
+              <p className="text-purple-500 font-bold tracking-[0.4em] mt-3">FULL STACK DEV</p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* CENTRAL SPLIT IMAGE */}
-          <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-30">
-            <div className="relative w-[450px] h-[550px]">
-              {/* Image Base (Greyscale or Dimmest state) */}
-              <img src={image} className="w-full h-full object-cover grayscale opacity-30 transition-opacity" alt="Manan Base" />
-              
-              {/* Highlight Overlay: Left Half */}
-              <div 
-                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`}
-                style={{ clipPath: 'inset(0 50% 0 0)' }}
-              >
-                <img src={image} className="w-full h-full object-cover" alt="Manan Left" />
-                <div className="absolute inset-0 bg-cyan-500/20 mix-blend-overlay" />
-              </div>
-
-              {/* Highlight Overlay: Right Half */}
-              <div 
-                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`}
-                style={{ clipPath: 'inset(0 0 0 50%)' }}
-              >
-                <img src={image} className="w-full h-full object-cover" alt="Manan Right" />
-                <div className="absolute inset-0 bg-purple-500/20 mix-blend-overlay" />
-              </div>
-            </div>
-          </div>
-
-          {/* SLIDING PANEL OVERLAYS (The "Shutter" effect) */}
-          <motion.div 
-            animate={{ width: hoveredSide === 'left' ? '100%' : hoveredSide === 'right' ? '0%' : '50%' }}
-            className="absolute left-0 top-0 h-full bg-cyan-500/5 border-r border-cyan-500/20 z-10 transition-all"
-          />
-          <motion.div 
-            animate={{ width: hoveredSide === 'right' ? '100%' : hoveredSide === 'left' ? '0%' : '50%' }}
-            className="absolute right-0 top-0 h-full bg-purple-500/5 border-l border-purple-500/20 z-10 transition-all"
-          />
         </section>
         {/* --- END UPDATED CODE BOUNDARY --- */}
 
@@ -639,12 +641,12 @@ function Home() {
           })()}
         </section>
 
-        {/* --- SECTION 3: SERVICES --- */}
+        {/* SECTION 3: SERVICES */}
         <section className="scroll-section grid grid-cols-1 md:grid-cols-3 gap-10">
           <div className="space-y-4">
             <FaRocket className="text-cyan-500 text-3xl" />
             <h3 className="text-xl font-bold">Frontend Mastery</h3>
-            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces.</p>
+            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces using React.</p>
           </div>
           <div className="space-y-4">
             <FaDatabase className="text-purple-500 text-3xl" />
@@ -658,7 +660,7 @@ function Home() {
           </div>
         </section>
 
-        {/* --- SECTION 4: FOOTER --- */}
+        {/* SECTION 4: FOOTER */}
         <section className="scroll-section border-t border-white/10 pt-20 pb-10 flex flex-col items-center space-y-10">
           <h2 className="text-4xl font-bold text-center">Let’s build something <br/> legendary.</h2>
           <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white transition-all">Get in touch</NavLink>
