@@ -417,7 +417,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import image from "../assets/me3.png";
+import image from "../assets/me2.jpeg";
 import { FaGithub, FaLinkedin, FaInstagram, FaCode, FaRocket, FaDatabase, FaChevronDown } from "react-icons/fa";
 import { SiX, SiJavascript, SiReact, SiTailwindcss, SiNodedotjs, SiMongodb, SiExpress, SiGit, SiPostman } from "react-icons/si";
 import gsap from "gsap";
@@ -489,7 +489,6 @@ function Home() {
             </h1>
             <p className="text-gray-400 text-lg max-w-lg">
               I transform complex ideas into sleek, high-performance web applications. 
-              Focused on user experience and scalable architecture.
             </p>
             <div className="flex gap-6">
               <NavLink to="/projects" className="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-cyan-500 hover:text-white transition-all duration-300">
@@ -506,57 +505,73 @@ function Home() {
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: WINDOW SLIDER (STATIONARY TEXT) --- */}
-        <section className="scroll-section relative h-[550px] w-full hidden md:flex items-stretch rounded-3xl overflow-hidden border border-white/10 bg-[#080808]">
+        {/* --- UPDATED CODE BOUNDARY: SCREEN-SPLIT INTERACTIVE REVEAL --- */}
+        <section className="scroll-section relative h-[600px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
           
-          {/* Left Panel (The Window) */}
-          <motion.div 
+          {/* Left Interaction Area */}
+          <div 
             onMouseEnter={() => setHoveredSide('left')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'left' ? '75%' : hoveredSide === 'right' ? '25%' : '50%' }}
-            className="relative flex items-center overflow-hidden border-r border-white/5 cursor-pointer"
-          >
-            {/* Stationary Content - Fixed Width ensures it doesn't move when parent width changes */}
-            <div className={`absolute left-0 w-[50vw] flex flex-col items-center justify-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-100 scale-100' : 'opacity-20 scale-95'}`}>
-              <h3 className="text-5xl font-bold text-cyan-500 mb-4 tracking-tighter">FRONTEND</h3>
-              <p className="text-zinc-500 text-sm tracking-[0.2em]">CRAFTING INTERFACES</p>
-            </div>
-            <div className={`absolute inset-0 bg-cyan-500/5 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`} />
-          </motion.div>
+            className="flex-1 z-40 cursor-pointer"
+          />
 
-          {/* Right Panel (The Window) */}
-          <motion.div 
+          {/* Right Interaction Area */}
+          <div 
             onMouseEnter={() => setHoveredSide('right')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'right' ? '75%' : hoveredSide === 'left' ? '25%' : '50%' }}
-            className="relative flex items-center overflow-hidden cursor-pointer"
-          >
-            {/* Stationary Content - Fixed Width prevents movement */}
-            <div className={`absolute right-0 w-[50vw] flex flex-col items-center justify-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-100 scale-100' : 'opacity-20 scale-95'}`}>
-              <h3 className="text-5xl font-bold text-purple-500 mb-4 tracking-tighter">BACKEND</h3>
-              <p className="text-zinc-500 text-sm tracking-[0.2em]">SCALING LOGIC</p>
-            </div>
-            <div className={`absolute inset-0 bg-purple-500/5 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`} />
-          </motion.div>
+            className="flex-1 z-40 cursor-pointer"
+          />
 
-          {/* Central Fixed Photo */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30">
-            <div className="relative w-64 h-80 rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-              <img src={image} alt="Manan" className="w-full h-full object-cover grayscale-[30%]" />
-              
-              {/* Image Visibility Logic: Dims half the photo */}
-              <div 
-                className={`absolute inset-0 bg-black/70 transition-all duration-700 ${
-                  hoveredSide === 'left' ? 'clip-right' : hoveredSide === 'right' ? 'clip-left' : 'opacity-0'
-                }`}
-              />
+          {/* BACKGROUND TEXT LAYER (STATIONARY) */}
+          <div className="absolute inset-0 flex items-center pointer-events-none">
+            {/* Left Text */}
+            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-0 translate-x-[-20px]' : 'opacity-100'}`}>
+              <h2 className="text-7xl font-black tracking-tighter text-white">DESIGNER</h2>
+              <p className="text-cyan-500 font-bold tracking-[0.3em] mt-2">UI / UX ARCHITECT</p>
+            </div>
+            
+            {/* Right Text */}
+            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-0 translate-x-[20px]' : 'opacity-100'}`}>
+              <h2 className="text-7xl font-black tracking-tighter text-white">&lt;CODER&gt;</h2>
+              <p className="text-purple-500 font-bold tracking-[0.3em] mt-2">FULL STACK DEV</p>
             </div>
           </div>
 
-          <style jsx>{`
-            .clip-right { clip-path: inset(0 0 0 50%); }
-            .clip-left { clip-path: inset(0 50% 0 0); }
-          `}</style>
+          {/* CENTRAL SPLIT IMAGE */}
+          <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-30">
+            <div className="relative w-[450px] h-[550px]">
+              {/* Image Base (Greyscale or Dimmest state) */}
+              <img src={image} className="w-full h-full object-cover grayscale opacity-30 transition-opacity" alt="Manan Base" />
+              
+              {/* Highlight Overlay: Left Half */}
+              <div 
+                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`}
+                style={{ clipPath: 'inset(0 50% 0 0)' }}
+              >
+                <img src={image} className="w-full h-full object-cover" alt="Manan Left" />
+                <div className="absolute inset-0 bg-cyan-500/20 mix-blend-overlay" />
+              </div>
+
+              {/* Highlight Overlay: Right Half */}
+              <div 
+                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`}
+                style={{ clipPath: 'inset(0 0 0 50%)' }}
+              >
+                <img src={image} className="w-full h-full object-cover" alt="Manan Right" />
+                <div className="absolute inset-0 bg-purple-500/20 mix-blend-overlay" />
+              </div>
+            </div>
+          </div>
+
+          {/* SLIDING PANEL OVERLAYS (The "Shutter" effect) */}
+          <motion.div 
+            animate={{ width: hoveredSide === 'left' ? '100%' : hoveredSide === 'right' ? '0%' : '50%' }}
+            className="absolute left-0 top-0 h-full bg-cyan-500/5 border-r border-cyan-500/20 z-10 transition-all"
+          />
+          <motion.div 
+            animate={{ width: hoveredSide === 'right' ? '100%' : hoveredSide === 'left' ? '0%' : '50%' }}
+            className="absolute right-0 top-0 h-full bg-purple-500/5 border-l border-purple-500/20 z-10 transition-all"
+          />
         </section>
         {/* --- END UPDATED CODE BOUNDARY --- */}
 
@@ -585,7 +600,7 @@ function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowSkills(!showSkills)}
-                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs"
                   >
                     {showSkills ? "Collapse Stack" : "Initialize Tech Stack"}
                     <motion.span animate={{ rotate: showSkills ? 180 : 0 }}><FaChevronDown /></motion.span>
@@ -603,10 +618,10 @@ function Home() {
                         {skills.map((skill, i) => (
                           <motion.div
                             key={i}
-                            variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0 } }}
+                            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                             className="group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl flex flex-col items-center gap-4 hover:border-cyan-500/50 transition-all duration-300"
                           >
-                            <div className="text-5xl group-hover:rotate-12 transition-transform">{skill.icon}</div>
+                            <div className="text-5xl">{skill.icon}</div>
                             <span className="font-bold uppercase tracking-widest text-[10px] text-gray-500 group-hover:text-white">{skill.name}</span>
                           </motion.div>
                         ))}
@@ -615,7 +630,7 @@ function Home() {
                   </AnimatePresence>
                   {!showSkills && (
                     <div className="py-10 text-center border-2 border-dashed border-white/5 rounded-2xl">
-                      <p className="text-gray-600 italic font-mono text-sm">// System ready. Click button to decrypt...</p>
+                      <p className="text-gray-600 italic font-mono text-sm">// System ready. Click to decrypt profile...</p>
                     </div>
                   )}
                 </div>
@@ -629,7 +644,7 @@ function Home() {
           <div className="space-y-4">
             <FaRocket className="text-cyan-500 text-3xl" />
             <h3 className="text-xl font-bold">Frontend Mastery</h3>
-            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces using React.</p>
+            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces.</p>
           </div>
           <div className="space-y-4">
             <FaDatabase className="text-purple-500 text-3xl" />
@@ -639,19 +654,17 @@ function Home() {
           <div className="space-y-4">
             <FaCode className="text-blue-500 text-3xl" />
             <h3 className="text-xl font-bold">Clean Code</h3>
-            <p className="text-gray-500 text-sm">Writing maintainable code that follows best practices.</p>
+            <p className="text-gray-500 text-sm">Writing maintainable, well-documented code.</p>
           </div>
         </section>
 
         {/* --- SECTION 4: FOOTER --- */}
         <section className="scroll-section border-t border-white/10 pt-20 pb-10 flex flex-col items-center space-y-10">
           <h2 className="text-4xl font-bold text-center">Let’s build something <br/> legendary.</h2>
-          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white hover:border-white transition-all">Get in touch</NavLink>
+          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white transition-all">Get in touch</NavLink>
           <div className="flex gap-8 text-2xl text-gray-500">
-            <a href="https://github.com/agarwal1771" className="hover:text-white"><FaGithub /></a>
-            <a href="https://linkedin.com/in/manan-agarwal-5b290a256" className="hover:text-white"><FaLinkedin /></a>
-            <a href="https://x.com/MananAgarwal136" className="hover:text-white"><SiX /></a>
-            <a href="https://instagram.com/manan_agarwal06" className="hover:text-white"><FaInstagram /></a>
+            <a href="https://github.com/agarwal1771" className="hover:text-white transition-colors"><FaGithub /></a>
+            <a href="https://linkedin.com/in/manan-agarwal-5b290a256" className="hover:text-white transition-colors"><FaLinkedin /></a>
           </div>
           <p className="text-xs text-gray-600">© 2026 MANAN AGARWAL. ALL RIGHTS RESERVED.</p>
         </section>
