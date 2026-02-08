@@ -415,7 +415,6 @@
 // export default Home;
 
 
-
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import image from "../assets/me2.jpeg";
@@ -431,7 +430,7 @@ function Home() {
   const mainContainer = useRef(null);
   const codeBlockRef = useRef(null);
 
-  // --- UPDATED CODE BOUNDARY: STATE FOR PERMANENT TEXT VISIBILITY ---
+  // --- UPDATED CODE BOUNDARY: HOVER STATE ---
   const [hoveredSide, setHoveredSide] = useState(null);
   // --- END UPDATED CODE BOUNDARY ---
 
@@ -463,7 +462,7 @@ function Home() {
 
       <div className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-40 pt-32 space-y-40 pb-20">
         
-        {/* SECTION 1: HERO */}
+        {/* --- SECTION 1: HERO --- */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="hero-text space-y-8">
             <div ref={codeBlockRef} className="relative group inline-block w-full max-w-md">
@@ -474,7 +473,7 @@ function Home() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <code>
+                <code className="text-sm md:text-base leading-7">
                   <span className="text-purple-400">class</span> <span className="text-yellow-300">Engineer</span> {"{"} <br />
                   &nbsp;&nbsp;name = <span className="text-green-400">'Manan'</span>;<br />
                   &nbsp;&nbsp;role = <span className="text-green-400">'Full-Stack Developer'</span>;<br />
@@ -490,6 +489,7 @@ function Home() {
             </h1>
             <p className="text-gray-400 text-lg max-w-lg">
               I transform complex ideas into sleek, high-performance web applications. 
+              Focused on user experience and scalable architecture.
             </p>
             <div className="flex gap-6">
               <NavLink to="/projects" className="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-cyan-500 hover:text-white transition-all duration-300">
@@ -506,49 +506,47 @@ function Home() {
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: THE REFINED DUAL SLIDER --- */}
-        <section className="scroll-section relative h-[500px] w-full hidden md:flex items-stretch rounded-3xl overflow-hidden border border-white/10 bg-[#080808]">
+        {/* --- UPDATED CODE BOUNDARY: WINDOW SLIDER (STATIONARY TEXT) --- */}
+        <section className="scroll-section relative h-[550px] w-full hidden md:flex items-stretch rounded-3xl overflow-hidden border border-white/10 bg-[#080808]">
           
-          {/* Left Section */}
+          {/* Left Panel (The Window) */}
           <motion.div 
             onMouseEnter={() => setHoveredSide('left')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'left' ? '65%' : hoveredSide === 'right' ? '35%' : '50%' }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative flex items-center justify-center cursor-pointer border-r border-white/5"
+            animate={{ width: hoveredSide === 'left' ? '75%' : hoveredSide === 'right' ? '25%' : '50%' }}
+            className="relative flex items-center overflow-hidden border-r border-white/5 cursor-pointer"
           >
-            <div className={`transition-all duration-700 text-center z-10 ${hoveredSide === 'left' ? 'opacity-100 scale-105' : 'opacity-20 scale-95 blur-[1px]'}`}>
-              <h3 className="text-4xl font-bold text-cyan-500 mb-2">Frontend</h3>
-              <p className="text-gray-400 text-sm tracking-widest uppercase">Pixel Perfect UI</p>
+            {/* Stationary Content - Fixed Width ensures it doesn't move when parent width changes */}
+            <div className={`absolute left-0 w-[50vw] flex flex-col items-center justify-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-100 scale-100' : 'opacity-20 scale-95'}`}>
+              <h3 className="text-5xl font-bold text-cyan-500 mb-4 tracking-tighter">FRONTEND</h3>
+              <p className="text-zinc-500 text-sm tracking-[0.2em]">CRAFTING INTERFACES</p>
             </div>
-            {/* Ambient Background Color */}
-            <div className={`absolute inset-0 bg-cyan-500/5 transition-opacity duration-700 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`} />
+            <div className={`absolute inset-0 bg-cyan-500/5 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`} />
           </motion.div>
 
-          {/* Right Section */}
+          {/* Right Panel (The Window) */}
           <motion.div 
             onMouseEnter={() => setHoveredSide('right')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'right' ? '65%' : hoveredSide === 'left' ? '35%' : '50%' }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative flex items-center justify-center cursor-pointer"
+            animate={{ width: hoveredSide === 'right' ? '75%' : hoveredSide === 'left' ? '25%' : '50%' }}
+            className="relative flex items-center overflow-hidden cursor-pointer"
           >
-            <div className={`transition-all duration-700 text-center z-10 ${hoveredSide === 'right' ? 'opacity-100 scale-105' : 'opacity-20 scale-95 blur-[1px]'}`}>
-              <h3 className="text-4xl font-bold text-purple-500 mb-2">Backend</h3>
-              <p className="text-gray-400 text-sm tracking-widest uppercase">Scalable Systems</p>
+            {/* Stationary Content - Fixed Width prevents movement */}
+            <div className={`absolute right-0 w-[50vw] flex flex-col items-center justify-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-100 scale-100' : 'opacity-20 scale-95'}`}>
+              <h3 className="text-5xl font-bold text-purple-500 mb-4 tracking-tighter">BACKEND</h3>
+              <p className="text-zinc-500 text-sm tracking-[0.2em]">SCALING LOGIC</p>
             </div>
-            {/* Ambient Background Color */}
-            <div className={`absolute inset-0 bg-purple-500/5 transition-opacity duration-700 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`} />
+            <div className={`absolute inset-0 bg-purple-500/5 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`} />
           </motion.div>
 
-          {/* Central Photo with Dynamic Masking */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20">
-            <div className="relative w-72 h-96 rounded-2xl overflow-hidden border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-black">
-              <img src={image} alt="Manan Center" className="w-full h-full object-cover grayscale-[20%]" />
+          {/* Central Fixed Photo */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30">
+            <div className="relative w-64 h-80 rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+              <img src={image} alt="Manan" className="w-full h-full object-cover grayscale-[30%]" />
               
-              {/* This overlay dims half the photo based on hover */}
+              {/* Image Visibility Logic: Dims half the photo */}
               <div 
-                className={`absolute inset-0 bg-black/50 transition-all duration-500 ${
+                className={`absolute inset-0 bg-black/70 transition-all duration-700 ${
                   hoveredSide === 'left' ? 'clip-right' : hoveredSide === 'right' ? 'clip-left' : 'opacity-0'
                 }`}
               />
@@ -587,14 +585,13 @@ function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowSkills(!showSkills)}
-                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white"
+                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
                   >
                     {showSkills ? "Collapse Stack" : "Initialize Tech Stack"}
-                    <motion.span animate={{ rotate: showSkills ? 180 : 0 }}>
-                      <FaChevronDown />
-                    </motion.span>
+                    <motion.span animate={{ rotate: showSkills ? 180 : 0 }}><FaChevronDown /></motion.span>
                   </motion.button>
                 </div>
+
                 <div className="relative min-h-[120px]">
                   <AnimatePresence>
                     {showSkills && (
@@ -606,20 +603,20 @@ function Home() {
                         {skills.map((skill, i) => (
                           <motion.div
                             key={i}
-                            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                            variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0 } }}
                             className="group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl flex flex-col items-center gap-4 hover:border-cyan-500/50 transition-all duration-300"
                           >
-                            <div className="text-5xl">{skill.icon}</div>
-                            <span className="font-bold uppercase tracking-widest text-[10px] text-gray-500">{skill.name}</span>
+                            <div className="text-5xl group-hover:rotate-12 transition-transform">{skill.icon}</div>
+                            <span className="font-bold uppercase tracking-widest text-[10px] text-gray-500 group-hover:text-white">{skill.name}</span>
                           </motion.div>
                         ))}
                       </motion.div>
                     )}
                   </AnimatePresence>
                   {!showSkills && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-10 text-center border-2 border-dashed border-white/5 rounded-2xl">
-                      <p className="text-gray-600 italic font-mono text-sm">// System ready. Click to decrypt...</p>
-                    </motion.div>
+                    <div className="py-10 text-center border-2 border-dashed border-white/5 rounded-2xl">
+                      <p className="text-gray-600 italic font-mono text-sm">// System ready. Click button to decrypt...</p>
+                    </div>
                   )}
                 </div>
               </>
@@ -632,7 +629,7 @@ function Home() {
           <div className="space-y-4">
             <FaRocket className="text-cyan-500 text-3xl" />
             <h3 className="text-xl font-bold">Frontend Mastery</h3>
-            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces.</p>
+            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces using React.</p>
           </div>
           <div className="space-y-4">
             <FaDatabase className="text-purple-500 text-3xl" />
@@ -642,17 +639,19 @@ function Home() {
           <div className="space-y-4">
             <FaCode className="text-blue-500 text-3xl" />
             <h3 className="text-xl font-bold">Clean Code</h3>
-            <p className="text-gray-500 text-sm">Writing maintainable, well-documented code.</p>
+            <p className="text-gray-500 text-sm">Writing maintainable code that follows best practices.</p>
           </div>
         </section>
 
         {/* --- SECTION 4: FOOTER --- */}
         <section className="scroll-section border-t border-white/10 pt-20 pb-10 flex flex-col items-center space-y-10">
           <h2 className="text-4xl font-bold text-center">Let’s build something <br/> legendary.</h2>
-          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white">Get in touch</NavLink>
+          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white hover:border-white transition-all">Get in touch</NavLink>
           <div className="flex gap-8 text-2xl text-gray-500">
-            <a href="https://github.com/agarwal1771"><FaGithub /></a>
-            <a href="https://linkedin.com/in/manan-agarwal-5b290a256"><FaLinkedin /></a>
+            <a href="https://github.com/agarwal1771" className="hover:text-white"><FaGithub /></a>
+            <a href="https://linkedin.com/in/manan-agarwal-5b290a256" className="hover:text-white"><FaLinkedin /></a>
+            <a href="https://x.com/MananAgarwal136" className="hover:text-white"><SiX /></a>
+            <a href="https://instagram.com/manan_agarwal06" className="hover:text-white"><FaInstagram /></a>
           </div>
           <p className="text-xs text-gray-600">© 2026 MANAN AGARWAL. ALL RIGHTS RESERVED.</p>
         </section>
