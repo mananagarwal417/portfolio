@@ -416,8 +416,7 @@
 
 
 
-
-import React, { useEffect, useRef, useState } from "react"; // Added useState
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import image from "../assets/me2.jpeg";
 import { FaGithub, FaLinkedin, FaInstagram, FaCode, FaRocket, FaDatabase, FaChevronDown } from "react-icons/fa";
@@ -430,63 +429,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
   const mainContainer = useRef(null);
-  const heroRef = useRef(null);
   const codeBlockRef = useRef(null);
 
-  // --- UPDATED CODE BOUNDARY: HOVER STATE ---
+  // --- UPDATED CODE BOUNDARY: STATE FOR PERMANENT TEXT VISIBILITY ---
   const [hoveredSide, setHoveredSide] = useState(null);
   // --- END UPDATED CODE BOUNDARY ---
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Initial Hero Animation
-      gsap.from(".hero-text", {
-        x: -100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-      });
+      gsap.from(".hero-text", { x: -100, opacity: 0, duration: 1.2, ease: "power4.out" });
+      gsap.from(".hero-image", { x: 100, opacity: 0, duration: 1.2, ease: "power4.out" });
 
-      gsap.from(".hero-image", {
-        x: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-      });
-
-      // 2. Scroll Animations for Sections
       const sections = gsap.utils.toArray(".scroll-section");
       sections.forEach((section) => {
         gsap.from(section, {
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 80%", toggleActions: "play none none none" },
+          y: 50, opacity: 0, duration: 1, ease: "power3.out",
         });
       });
 
-      // 3. Floating effect
-      gsap.to(codeBlockRef.current, {
-        y: 15,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      gsap.to(codeBlockRef.current, { y: 15, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
     }, mainContainer);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <div ref={mainContainer} className="min-h-screen bg-[#050505] text-white font-mono selection:bg-cyan-500/30 overflow-x-hidden">
       
-      {/* Background Glows */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-cyan-900/10 blur-[150px] rounded-full" />
         <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-purple-900/10 blur-[150px] rounded-full" />
@@ -494,7 +463,7 @@ function Home() {
 
       <div className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-40 pt-32 space-y-40 pb-20">
         
-        {/* --- SECTION 1: HERO --- */}
+        {/* SECTION 1: HERO */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="hero-text space-y-8">
             <div ref={codeBlockRef} className="relative group inline-block w-full max-w-md">
@@ -505,7 +474,7 @@ function Home() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <code className="text-sm md:text-base leading-7">
+                <code>
                   <span className="text-purple-400">class</span> <span className="text-yellow-300">Engineer</span> {"{"} <br />
                   &nbsp;&nbsp;name = <span className="text-green-400">'Manan'</span>;<br />
                   &nbsp;&nbsp;role = <span className="text-green-400">'Full-Stack Developer'</span>;<br />
@@ -521,7 +490,6 @@ function Home() {
             </h1>
             <p className="text-gray-400 text-lg max-w-lg">
               I transform complex ideas into sleek, high-performance web applications. 
-              Focused on user experience and scalable architecture.
             </p>
             <div className="flex gap-6">
               <NavLink to="/projects" className="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-cyan-500 hover:text-white transition-all duration-300">
@@ -533,51 +501,54 @@ function Home() {
           <div className="hero-image flex justify-center lg:justify-end">
             <div className="relative">
               <div className="absolute inset-0 bg-cyan-500 rounded-3xl rotate-6 opacity-10" />
-              <img 
-                src={image} 
-                alt="Manan" 
-                className="relative w-72 h-96 md:w-80 md:h-[450px] object-cover rounded-3xl border border-white/10 shadow-2xl" 
-              />
+              <img src={image} alt="Manan" className="relative w-72 h-96 md:w-80 md:h-[450px] object-cover rounded-3xl border border-white/10 shadow-2xl" />
             </div>
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: DUAL SLIDING INTERACTIVE SECTION --- */}
-        <section className="scroll-section relative h-[600px] w-full hidden md:flex items-stretch rounded-3xl overflow-hidden border border-white/5">
-          {/* Left Panel */}
+        {/* --- UPDATED CODE BOUNDARY: THE REFINED DUAL SLIDER --- */}
+        <section className="scroll-section relative h-[500px] w-full hidden md:flex items-stretch rounded-3xl overflow-hidden border border-white/10 bg-[#080808]">
+          
+          {/* Left Section */}
           <motion.div 
             onMouseEnter={() => setHoveredSide('left')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'left' ? '70%' : hoveredSide === 'right' ? '30%' : '50%' }}
-            className="relative flex flex-col items-center justify-center bg-cyan-900/5 cursor-pointer overflow-hidden border-r border-white/5"
+            animate={{ width: hoveredSide === 'left' ? '65%' : hoveredSide === 'right' ? '35%' : '50%' }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="relative flex items-center justify-center cursor-pointer border-r border-white/5"
           >
-            <div className={`z-10 transition-all duration-500 text-center px-10 ${hoveredSide === 'left' ? 'opacity-100 scale-100' : 'opacity-20 scale-90'}`}>
-              <h3 className="text-3xl font-bold text-cyan-500 mb-4">Frontend Architecture</h3>
-              <p className="text-gray-400 max-w-xs">Crafting interactive, pixel-perfect user interfaces with React and Tailwind CSS.</p>
+            <div className={`transition-all duration-700 text-center z-10 ${hoveredSide === 'left' ? 'opacity-100 scale-105' : 'opacity-20 scale-95 blur-[1px]'}`}>
+              <h3 className="text-4xl font-bold text-cyan-500 mb-2">Frontend</h3>
+              <p className="text-gray-400 text-sm tracking-widest uppercase">Pixel Perfect UI</p>
             </div>
+            {/* Ambient Background Color */}
+            <div className={`absolute inset-0 bg-cyan-500/5 transition-opacity duration-700 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`} />
           </motion.div>
 
-          {/* Right Panel */}
+          {/* Right Section */}
           <motion.div 
             onMouseEnter={() => setHoveredSide('right')}
             onMouseLeave={() => setHoveredSide(null)}
-            animate={{ width: hoveredSide === 'right' ? '70%' : hoveredSide === 'left' ? '30%' : '50%' }}
-            className="relative flex flex-col items-center justify-center bg-purple-900/5 cursor-pointer overflow-hidden"
+            animate={{ width: hoveredSide === 'right' ? '65%' : hoveredSide === 'left' ? '35%' : '50%' }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="relative flex items-center justify-center cursor-pointer"
           >
-            <div className={`z-10 transition-all duration-500 text-center px-10 ${hoveredSide === 'right' ? 'opacity-100 scale-100' : 'opacity-20 scale-90'}`}>
-              <h3 className="text-3xl font-bold text-purple-500 mb-4">Backend Systems</h3>
-              <p className="text-gray-400 max-w-xs">Building scalable real-time servers, APIs, and secure MongoDB databases.</p>
+            <div className={`transition-all duration-700 text-center z-10 ${hoveredSide === 'right' ? 'opacity-100 scale-105' : 'opacity-20 scale-95 blur-[1px]'}`}>
+              <h3 className="text-4xl font-bold text-purple-500 mb-2">Backend</h3>
+              <p className="text-gray-400 text-sm tracking-widest uppercase">Scalable Systems</p>
             </div>
+            {/* Ambient Background Color */}
+            <div className={`absolute inset-0 bg-purple-500/5 transition-opacity duration-700 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`} />
           </motion.div>
 
-          {/* Central Photo */}
+          {/* Central Photo with Dynamic Masking */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20">
-            <div className="relative w-64 h-80 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
-              <img src={image} alt="Manan Center" className="w-full h-full object-cover" />
+            <div className="relative w-72 h-96 rounded-2xl overflow-hidden border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-black">
+              <img src={image} alt="Manan Center" className="w-full h-full object-cover grayscale-[20%]" />
               
-              {/* Highlight logic: clips the overlay to make one half of the photo "pop" */}
+              {/* This overlay dims half the photo based on hover */}
               <div 
-                className={`absolute inset-0 bg-black/60 transition-all duration-500 ${
+                className={`absolute inset-0 bg-black/50 transition-all duration-500 ${
                   hoveredSide === 'left' ? 'clip-right' : hoveredSide === 'right' ? 'clip-left' : 'opacity-0'
                 }`}
               />
@@ -616,7 +587,7 @@ function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowSkills(!showSkills)}
-                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white"
                   >
                     {showSkills ? "Collapse Stack" : "Initialize Tech Stack"}
                     <motion.span animate={{ rotate: showSkills ? 180 : 0 }}>
@@ -624,47 +595,30 @@ function Home() {
                     </motion.span>
                   </motion.button>
                 </div>
-                {/* ... (rest of Arsenal content remains exactly as you had it) */}
                 <div className="relative min-h-[120px]">
                   <AnimatePresence>
                     {showSkills && (
                       <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
+                        initial="hidden" animate="visible" exit="hidden"
                         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
                         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
                       >
                         {skills.map((skill, i) => (
                           <motion.div
                             key={i}
-                            variants={{
-                              hidden: { opacity: 0, scale: 0.8, y: 20 },
-                              visible: { opacity: 1, scale: 1, y: 0 }
-                            }}
-                            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                             className="group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl flex flex-col items-center gap-4 hover:border-cyan-500/50 transition-all duration-300"
                           >
-                            <div className="text-5xl group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300">
-                              {skill.icon}
-                            </div>
-                            <span className="font-bold uppercase tracking-widest text-[10px] text-gray-500 group-hover:text-white transition-colors">
-                              {skill.name}
-                            </span>
+                            <div className="text-5xl">{skill.icon}</div>
+                            <span className="font-bold uppercase tracking-widest text-[10px] text-gray-500">{skill.name}</span>
                           </motion.div>
                         ))}
                       </motion.div>
                     )}
                   </AnimatePresence>
                   {!showSkills && (
-                    <motion.div 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="py-10 text-center border-2 border-dashed border-white/5 rounded-2xl"
-                    >
-                      <p className="text-gray-600 italic font-mono text-sm">
-                        // System ready. Click button to decrypt technical profile...
-                      </p>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-10 text-center border-2 border-dashed border-white/5 rounded-2xl">
+                      <p className="text-gray-600 italic font-mono text-sm">// System ready. Click to decrypt...</p>
                     </motion.div>
                   )}
                 </div>
@@ -678,31 +632,27 @@ function Home() {
           <div className="space-y-4">
             <FaRocket className="text-cyan-500 text-3xl" />
             <h3 className="text-xl font-bold">Frontend Mastery</h3>
-            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces using React and modern CSS frameworks.</p>
+            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces.</p>
           </div>
           <div className="space-y-4">
             <FaDatabase className="text-purple-500 text-3xl" />
             <h3 className="text-xl font-bold">Backend Logic</h3>
-            <p className="text-gray-500 text-sm">Designing robust APIs and database schemas to power data-heavy applications.</p>
+            <p className="text-gray-500 text-sm">Designing robust APIs and database schemas.</p>
           </div>
           <div className="space-y-4">
             <FaCode className="text-blue-500 text-3xl" />
             <h3 className="text-xl font-bold">Clean Code</h3>
-            <p className="text-gray-500 text-sm">Writing maintainable, well-documented code that follows industry best practices.</p>
+            <p className="text-gray-500 text-sm">Writing maintainable, well-documented code.</p>
           </div>
         </section>
 
         {/* --- SECTION 4: FOOTER --- */}
         <section className="scroll-section border-t border-white/10 pt-20 pb-10 flex flex-col items-center space-y-10">
           <h2 className="text-4xl font-bold text-center">Let’s build something <br/> legendary.</h2>
-          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white hover:border-white transition-all">
-            Get in touch
-          </NavLink>
+          <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white">Get in touch</NavLink>
           <div className="flex gap-8 text-2xl text-gray-500">
-            <a href="https://github.com/agarwal1771" className="hover:text-white transition-colors"><FaGithub /></a>
-            <a href="https://linkedin.com/in/manan-agarwal-5b290a256" className="hover:text-white transition-colors"><FaLinkedin /></a>
-            <a href="https://x.com/MananAgarwal136" className="hover:text-white transition-colors"><SiX /></a>
-            <a href="https://instagram.com/manan_agarwal06" className="hover:text-white transition-colors"><FaInstagram /></a>
+            <a href="https://github.com/agarwal1771"><FaGithub /></a>
+            <a href="https://linkedin.com/in/manan-agarwal-5b290a256"><FaLinkedin /></a>
           </div>
           <p className="text-xs text-gray-600">© 2026 MANAN AGARWAL. ALL RIGHTS RESERVED.</p>
         </section>
