@@ -417,7 +417,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import image from "../assets/me2.jpeg";
+import image from "../assets/me3.png";
 import { FaGithub, FaLinkedin, FaInstagram, FaCode, FaRocket, FaDatabase, FaChevronDown } from "react-icons/fa";
 import { SiX, SiJavascript, SiReact, SiTailwindcss, SiNodedotjs, SiMongodb, SiExpress, SiGit, SiPostman } from "react-icons/si";
 import gsap from "gsap";
