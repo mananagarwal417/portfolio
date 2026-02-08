@@ -417,7 +417,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import image from "../assets/me3.png";
+import image from "../assets/me2.jpeg";
 import { FaGithub, FaLinkedin, FaInstagram, FaCode, FaRocket, FaDatabase, FaChevronDown } from "react-icons/fa";
 import { SiX, SiJavascript, SiReact, SiTailwindcss, SiNodedotjs, SiMongodb, SiExpress, SiGit, SiPostman } from "react-icons/si";
 import gsap from "gsap";
@@ -430,7 +430,7 @@ function Home() {
   const mainContainer = useRef(null);
   const codeBlockRef = useRef(null);
 
-  // --- UPDATED CODE BOUNDARY: STATE FOR INTERACTIVE REVEAL ---
+  // --- UPDATED CODE BOUNDARY: STATE FOR FULL-HEIGHT SPLIT ---
   const [hoveredSide, setHoveredSide] = useState(null);
   // --- END UPDATED CODE BOUNDARY ---
 
@@ -501,83 +501,75 @@ function Home() {
           <div className="hero-image flex justify-center lg:justify-end">
             <div className="relative">
               <div className="absolute inset-0 bg-cyan-500 rounded-3xl rotate-6 opacity-10" />
-              <img src={image} alt="Manan" className="relative w-72 h-96 md:w-80 md:h-[450px] object-cover rounded-3xl border border-white/10 shadow-2xl" />
+              <img src={image} alt="Manan Agarwal" className="relative w-72 h-96 md:w-80 md:h-[450px] object-cover rounded-3xl border border-white/10 shadow-2xl" />
             </div>
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: SCREENSHOT-INSPIRED SPLIT REVEAL --- */}
-        <section className="scroll-section relative h-[600px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
+        {/* --- UPDATED CODE BOUNDARY: FULL-HEIGHT STRETCHED REVEAL --- */}
+        <section className="scroll-section relative h-[700px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
           
-          {/* Interaction Zones */}
+          {/* Invisible Interaction Zones */}
           <div onMouseEnter={() => setHoveredSide('left')} onMouseLeave={() => setHoveredSide(null)} className="absolute inset-y-0 left-0 w-1/2 z-50 cursor-pointer" />
           <div onMouseEnter={() => setHoveredSide('right')} onMouseLeave={() => setHoveredSide(null)} className="absolute inset-y-0 right-0 w-1/2 z-50 cursor-pointer" />
 
-          {/* STATIONARY BACKGROUND CONTENT */}
+          {/* BACKGROUND STATIONARY TEXT LAYER */}
           <div className="absolute inset-0 flex items-center pointer-events-none z-10">
-            {/* Designer Content (Left Half) */}
-            <div className={`w-1/2 flex flex-col items-center px-10 transition-all duration-700 ease-in-out ${hoveredSide === 'right' ? 'opacity-0 scale-90 -translate-x-10' : 'opacity-100 scale-100'}`}>
-              <h2 className="text-7xl font-black tracking-tighter text-white uppercase mb-4">designer</h2>
-              <p className="text-zinc-500 text-center max-w-xs text-sm leading-relaxed">
-                Product designer specialising in UI design and design systems.
-              </p>
-              {/* Optional artistic background element like the screenshot */}
-              <div className="absolute -z-10 opacity-20 blur-2xl w-64 h-64 bg-cyan-500/20 rounded-full" />
+            {/* Left Side Content */}
+            <div className={`w-1/2 flex flex-col items-center px-10 transition-all duration-700 ${hoveredSide === 'right' ? 'opacity-0 scale-90' : 'opacity-100'}`}>
+              <h2 className="text-8xl font-black tracking-tighter text-white uppercase">designer</h2>
+              <p className="text-cyan-500 font-bold tracking-[0.4em] mt-4">UI / UX ARCHITECT</p>
             </div>
 
-            {/* Coder Content (Right Half) */}
-            <div className={`w-1/2 flex flex-col items-center px-10 transition-all duration-700 ease-in-out ${hoveredSide === 'left' ? 'opacity-0 scale-90 translate-x-10' : 'opacity-100 scale-100'}`}>
-              <h2 className="text-7xl font-black tracking-tighter text-white uppercase mb-4">&lt;coder&gt;</h2>
-              <p className="text-zinc-500 text-center max-w-xs text-sm leading-relaxed">
-                Full stack developer who writes clean, elegant and efficient code.
-              </p>
-              {/* Optional technical background element like the screenshot */}
-              <div className="absolute -z-10 opacity-10 font-mono text-[10px] whitespace-pre text-white/50">
-                {`<div>\n  <span>\n    <h1>Build</h1>\n  </span>\n</div>`}
-              </div>
+            {/* Right Side Content */}
+            <div className={`w-1/2 flex flex-col items-center px-10 transition-all duration-700 ${hoveredSide === 'left' ? 'opacity-0 scale-90' : 'opacity-100'}`}>
+              <h2 className="text-8xl font-black tracking-tighter text-white uppercase">&lt;coder&gt;</h2>
+              <p className="text-purple-500 font-bold tracking-[0.4em] mt-4">FULL STACK DEV</p>
             </div>
           </div>
 
-          {/* REVEALING PANELS (Shutters) */}
-          <motion.div 
-            animate={{ width: hoveredSide === 'left' ? '85%' : hoveredSide === 'right' ? '15%' : '50%' }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="absolute left-0 top-0 h-full bg-zinc-900/5 border-r border-white/10 z-20"
-          />
-          <motion.div 
-            animate={{ width: hoveredSide === 'right' ? '85%' : hoveredSide === 'left' ? '15%' : '50%' }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="absolute right-0 top-0 h-full bg-zinc-900/5 border-l border-white/10 z-20"
-          />
-
-          {/* SLIDING CENTRAL PHOTO */}
+          {/* FULL-SECTION SLIDING PANELS (The Background Colors) */}
           <motion.div 
             animate={{ 
-              x: hoveredSide === 'left' ? 60 : hoveredSide === 'right' ? -60 : 0 
+              width: hoveredSide === 'left' ? '85%' : hoveredSide === 'right' ? '15%' : '50%',
+              backgroundColor: hoveredSide === 'left' ? 'rgba(6, 182, 212, 0.1)' : 'rgba(0, 0, 0, 0)' 
             }}
-            transition={{ type: "spring", stiffness: 80, damping: 20 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="absolute left-0 top-0 h-full border-r border-white/10 z-20"
+          />
+          <motion.div 
+            animate={{ 
+              width: hoveredSide === 'right' ? '85%' : hoveredSide === 'left' ? '15%' : '50%',
+              backgroundColor: hoveredSide === 'right' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(0, 0, 0, 0)' 
+            }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="absolute right-0 top-0 h-full border-l border-white/10 z-20"
+          />
+
+          {/* FULL-HEIGHT STRETCHED PHOTO (Shifts away from hover) */}
+          <motion.div 
+            animate={{ x: hoveredSide === 'left' ? 80 : hoveredSide === 'right' ? -80 : 0 }}
+            transition={{ type: "spring", stiffness: 80, damping: 25 }}
             className="absolute inset-0 flex justify-center items-center pointer-events-none z-40"
           >
-            <div className="relative w-[450px] h-[550px] group">
-              {/* Base Greyscale Image */}
-              <img src={image} className="w-full h-full object-cover grayscale opacity-40 transition-opacity duration-500" alt="Manan Base" />
+            <div className="relative w-[500px] h-full overflow-hidden border-x border-white/20">
+              {/* Greyscale Base Layer */}
+              <img src={image} className="w-full h-full object-cover grayscale brightness-[0.25]" alt="Full Height Base" />
 
-              {/* Reveal: Left Half (Designer Color) */}
+              {/* Designer Highlight (Left Half) */}
               <div 
                 className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`}
                 style={{ clipPath: 'inset(0 50% 0 0)' }}
               >
-                <img src={image} className="w-full h-full object-cover" alt="Manan Left" />
-                <div className="absolute inset-0 bg-cyan-500/10 mix-blend-overlay" />
+                <img src={image} className="w-full h-full object-cover brightness-110" alt="Full Height Left" />
               </div>
 
-              {/* Reveal: Right Half (Coder Color) */}
+              {/* Coder Highlight (Right Half) */}
               <div 
                 className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`}
                 style={{ clipPath: 'inset(0 0 0 50%)' }}
               >
-                <img src={image} className="w-full h-full object-cover" alt="Manan Right" />
-                <div className="absolute inset-0 bg-purple-500/10 mix-blend-overlay" />
+                <img src={image} className="w-full h-full object-cover brightness-110" alt="Full Height Right" />
               </div>
             </div>
           </motion.div>
