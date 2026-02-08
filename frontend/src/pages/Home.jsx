@@ -462,7 +462,7 @@ function Home() {
 
       <div className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-40 pt-32 space-y-40 pb-20">
         
-        {/* SECTION 1: HERO */}
+        {/* --- SECTION 1: HERO --- */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[70vh]">
           <div className="hero-text space-y-8">
             <div ref={codeBlockRef} className="relative group inline-block w-full max-w-md">
@@ -505,72 +505,67 @@ function Home() {
           </div>
         </section>
 
-        {/* --- UPDATED CODE BOUNDARY: SLIDING PHOTO & STATIONARY TEXT --- */}
-        <section className="scroll-section relative h-[650px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/5">
+        {/* --- UPDATED CODE BOUNDARY: SHIFTING PHOTO & STATIONARY TEXT --- */}
+        <section className="scroll-section relative h-[600px] w-full hidden md:flex items-stretch overflow-hidden bg-black border-y border-white/10">
           
-          {/* Interaction Area Overlays */}
-          <div 
-            onMouseEnter={() => setHoveredSide('left')}
-            onMouseLeave={() => setHoveredSide(null)}
-            className="absolute inset-y-0 left-0 w-1/2 z-50 cursor-pointer"
-          />
-          <div 
-            onMouseEnter={() => setHoveredSide('right')}
-            onMouseLeave={() => setHoveredSide(null)}
-            className="absolute inset-y-0 right-0 w-1/2 z-50 cursor-pointer"
-          />
+          {/* Interaction Overlays */}
+          <div onMouseEnter={() => setHoveredSide('left')} onMouseLeave={() => setHoveredSide(null)} className="absolute inset-y-0 left-0 w-1/2 z-50 cursor-pointer" />
+          <div onMouseEnter={() => setHoveredSide('right')} onMouseLeave={() => setHoveredSide(null)} className="absolute inset-y-0 right-0 w-1/2 z-50 cursor-pointer" />
 
-          {/* Left Panel (Designer Side) */}
-          <motion.div 
-            animate={{ width: hoveredSide === 'left' ? '75%' : hoveredSide === 'right' ? '25%' : '50%' }}
-            transition={{ type: "spring", stiffness: 150, damping: 20 }}
-            className="relative h-full overflow-hidden flex items-center justify-end border-r border-white/10"
-          >
-            {/* Stationary Background Text (Fixed to Viewport) */}
-            <div 
-              className={`absolute left-[15%] w-[400px] text-center transition-all duration-500 ${hoveredSide === 'right' ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
-            >
+          {/* BACKGROUND STATIONARY TEXT */}
+          <div className="absolute inset-0 flex items-center pointer-events-none z-10">
+            {/* Left Side Text */}
+            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ease-out ${hoveredSide === 'right' ? 'opacity-0 scale-90 -translate-x-10' : 'opacity-100 scale-100'}`}>
               <h2 className="text-7xl font-black tracking-tighter text-white">DESIGNER</h2>
-              <p className="text-cyan-500 font-bold tracking-[0.4em] mt-3">UI / UX ARCHITECT</p>
+              <p className="text-cyan-500 font-bold tracking-[0.4em] mt-2">CRAFTING PIXELS</p>
             </div>
 
-            {/* Sliding Photo Half (Left) - Anchored to the moving split point */}
-            <div className="relative w-[300px] h-[550px] flex-shrink-0 z-20">
-              <img 
-                src={image} 
-                className="absolute right-0 w-[600px] h-full object-cover grayscale transition-all duration-700" 
-                style={{ 
-                  clipPath: 'inset(0 50% 0 0)',
-                  filter: hoveredSide === 'left' ? 'grayscale(0%)' : 'grayscale(100%) brightness(0.3)'
-                }} 
-              />
-            </div>
-          </motion.div>
-
-          {/* Right Panel (Coder Side) */}
-          <motion.div 
-            animate={{ width: hoveredSide === 'right' ? '75%' : hoveredSide === 'left' ? '25%' : '50%' }}
-            transition={{ type: "spring", stiffness: 150, damping: 20 }}
-            className="relative h-full overflow-hidden flex items-center justify-start"
-          >
-            {/* Sliding Photo Half (Right) - Anchored to the moving split point */}
-            <div className="relative w-[300px] h-[550px] flex-shrink-0 z-20">
-              <img 
-                src={image} 
-                className="absolute left-0 w-[600px] h-full object-cover grayscale transition-all duration-700" 
-                style={{ 
-                  clipPath: 'inset(0 0 0 50%)',
-                  filter: hoveredSide === 'right' ? 'grayscale(0%)' : 'grayscale(100%) brightness(0.3)'
-                }} 
-              />
-            </div>
-
-            {/* Stationary Background Text (Fixed to Viewport) */}
-            <div 
-              className={`absolute right-[15%] w-[400px] text-center transition-all duration-500 ${hoveredSide === 'left' ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
-            >
+            {/* Right Side Text */}
+            <div className={`w-1/2 flex flex-col items-center transition-all duration-500 ease-out ${hoveredSide === 'left' ? 'opacity-0 scale-90 translate-x-10' : 'opacity-100 scale-100'}`}>
               <h2 className="text-7xl font-black tracking-tighter text-white">&lt;CODER&gt;</h2>
-              <p className="text-purple-500 font-bold tracking-[0.4em] mt-3">FULL STACK DEV</p>
+              <p className="text-purple-500 font-bold tracking-[0.4em] mt-2">SCALING LOGIC</p>
+            </div>
+          </div>
+
+          {/* SLIDING SHUTTERS (Window Panels) */}
+          <motion.div 
+            animate={{ width: hoveredSide === 'left' ? '80%' : hoveredSide === 'right' ? '20%' : '50%' }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            className="absolute left-0 top-0 h-full bg-cyan-500/5 border-r border-white/10 z-20"
+          />
+          <motion.div 
+            animate={{ width: hoveredSide === 'right' ? '80%' : hoveredSide === 'left' ? '20%' : '50%' }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            className="absolute right-0 top-0 h-full bg-purple-500/5 border-l border-white/10 z-20"
+          />
+
+          {/* THE SLIDING PHOTO (Shifts away from hover) */}
+          <motion.div 
+            animate={{ 
+              x: hoveredSide === 'left' ? 40 : hoveredSide === 'right' ? -40 : 0 
+            }}
+            transition={{ type: "spring", stiffness: 100, damping: 25 }}
+            className="absolute inset-0 flex justify-center items-center pointer-events-none z-30"
+          >
+            <div className="relative w-[400px] h-[500px] rounded-2xl overflow-hidden border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+              {/* Base Image (Dark/Inactive) */}
+              <img src={image} alt="Base" className="w-full h-full object-cover grayscale brightness-[0.2]" />
+
+              {/* Highlight Left Half */}
+              <div 
+                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'left' ? 'opacity-100' : 'opacity-0'}`}
+                style={{ clipPath: 'inset(0 50% 0 0)' }}
+              >
+                <img src={image} alt="Left Active" className="w-full h-full object-cover" />
+              </div>
+
+              {/* Highlight Right Half */}
+              <div 
+                className={`absolute inset-0 transition-opacity duration-500 ${hoveredSide === 'right' ? 'opacity-100' : 'opacity-0'}`}
+                style={{ clipPath: 'inset(0 0 0 50%)' }}
+              >
+                <img src={image} alt="Right Active" className="w-full h-full object-cover" />
+              </div>
             </div>
           </motion.div>
 
@@ -602,7 +597,7 @@ function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowSkills(!showSkills)}
-                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs"
+                    className="flex items-center gap-3 bg-cyan-500 text-black px-8 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-white"
                   >
                     {showSkills ? "Collapse Stack" : "Initialize Tech Stack"}
                     <motion.span animate={{ rotate: showSkills ? 180 : 0 }}><FaChevronDown /></motion.span>
@@ -641,12 +636,12 @@ function Home() {
           })()}
         </section>
 
-        {/* SECTION 3: SERVICES */}
+        {/* --- SECTION 3: SERVICES --- */}
         <section className="scroll-section grid grid-cols-1 md:grid-cols-3 gap-10">
           <div className="space-y-4">
             <FaRocket className="text-cyan-500 text-3xl" />
             <h3 className="text-xl font-bold">Frontend Mastery</h3>
-            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces using React.</p>
+            <p className="text-gray-500 text-sm">Building ultra-fast, responsive interfaces.</p>
           </div>
           <div className="space-y-4">
             <FaDatabase className="text-purple-500 text-3xl" />
@@ -660,7 +655,7 @@ function Home() {
           </div>
         </section>
 
-        {/* SECTION 4: FOOTER */}
+        {/* --- SECTION 4: FOOTER --- */}
         <section className="scroll-section border-t border-white/10 pt-20 pb-10 flex flex-col items-center space-y-10">
           <h2 className="text-4xl font-bold text-center">Let’s build something <br/> legendary.</h2>
           <NavLink to="/contact" className="text-cyan-500 text-xl border-b border-cyan-500 pb-2 hover:text-white transition-all">Get in touch</NavLink>
