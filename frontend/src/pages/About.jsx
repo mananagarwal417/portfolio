@@ -103,12 +103,15 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaDatabase, FaCode, FaServer, FaTools } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaDatabase, FaCode, FaServer, FaTools , FaProjectDiagram } from "react-icons/fa";
 import { SiMongodb, SiTailwindcss, SiJavascript, SiAdobephotoshop, SiExpress, SiGit, SiPostman } from "react-icons/si";
 import { HiDownload } from "react-icons/hi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Typewriter from "typewriter-effect";
+import { GiBrain } from "react-icons/gi";
+import { HiPencilAlt } from "react-icons/hi";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -193,56 +196,72 @@ function About() {
 
         {/* --- SKILLS DASHBOARD --- */}
         <section className="skills-container space-y-12">
-          <h2 className="text-2xl font-bold flex items-center gap-4">
-            <span className="w-12 h-[1px] bg-cyan-500"></span> Technical Stack
-          </h2>
+  <h2 className="text-2xl font-bold flex items-center gap-4">
+    <span className="w-12 h-[1px] bg-cyan-500"></span> Technical Stack
+  </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Frontend Card */}
-            <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-cyan-500/50 transition-colors">
-              <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-6 text-cyan-500 text-2xl">
-                <FaCode />
-              </div>
-              <h3 className="text-xl font-bold mb-6">Frontend</h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge icon={<FaReact className="text-cyan-400" />} label="React" />
-                <SkillBadge icon={<SiJavascript className="text-yellow-400" />} label="JavaScript" />
-                <SkillBadge icon={<SiTailwindcss className="text-cyan-500" />} label="Tailwind" />
-                <SkillBadge icon={<SiAdobephotoshop className="text-blue-500" />} label="Photoshop" />
-              </div>
-            </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+    
+    {/* Frontend Card */}
+    <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-cyan-500/50 transition-colors">
+      <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-6 text-cyan-500 text-2xl">
+        <FaCode />
+      </div>
+      <h3 className="text-xl font-bold mb-6">Frontend</h3>
+      <div className="flex flex-wrap gap-3">
+        <SkillBadge icon={<FaReact className="text-cyan-400" />} label="React" />
+        <SkillBadge icon={<SiJavascript className="text-yellow-400" />} label="JavaScript" />
+        <SkillBadge icon={<SiTailwindcss className="text-cyan-500" />} label="Tailwind" />
+        <SkillBadge icon={<SiAdobephotoshop className="text-blue-500" />} label="Photoshop" />
+      </div>
+    </div>
 
-            {/* Backend Card */}
-            <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-green-500/50 transition-colors">
-              <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6 text-green-500 text-2xl">
-                <FaServer />
-              </div>
-              <h3 className="text-xl font-bold mb-6">Backend</h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge icon={<FaNodeJs className="text-green-500" />} label="Node.js" />
-                <SkillBadge icon={<SiExpress className="text-white" />} label="Express" />
-                <SkillBadge icon={<SiMongodb className="text-green-400" />} label="MongoDB" />
-                <SkillBadge icon={<FaDatabase className="text-blue-400" />} label="PostgreSQL" />
-              </div>
-            </div>
+    {/* Backend Card */}
+    <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-green-500/50 transition-colors">
+      <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6 text-green-500 text-2xl">
+        <FaServer />
+      </div>
+      <h3 className="text-xl font-bold mb-6">Backend</h3>
+      <div className="flex flex-wrap gap-3">
+        <SkillBadge icon={<FaNodeJs className="text-green-500" />} label="Node.js" />
+        <SkillBadge icon={<SiExpress className="text-white" />} label="Express" />
+        <SkillBadge icon={<SiMongodb className="text-green-400" />} label="MongoDB" />
+        <SkillBadge icon={<FaDatabase className="text-blue-400" />} label="SQL" />
+      </div>
+    </div>
 
-            {/* Core & Tools */}
-            <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-purple-500/50 transition-colors">
-              <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6 text-purple-500 text-2xl">
-                <FaTools />
-              </div>
-              <h3 className="text-xl font-bold mb-6">Core & Tools</h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge icon={<SiGit className="text-orange-500" />} label="Git" />
-                <SkillBadge icon={<SiPostman className="text-orange-400" />} label="Postman" />
-                <SkillBadge icon={<FaCode className="text-cyan-400" />} label="System Design" />
-                <SkillBadge icon={<FaTools className="text-gray-400" />} label="REST APIs" />
-              </div>
-            </div>
+    {/* CS Fundamentals Card - Added OS, DBMS, Networking, and DSA */}
+    <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-red-500/50 transition-colors">
+      <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 text-red-500 text-2xl">
+        <FaDatabase />
+      </div>
+      <h3 className="text-xl font-bold mb-6">CS Fundamentals</h3>
+      <div className="flex flex-wrap gap-3">
+        <SkillBadge icon={<FaServer className="text-red-400" />} label="Operating Systems" />
+        <SkillBadge icon={<FaDatabase className="text-orange-400" />} label="DBMS" />
+        <SkillBadge icon={<FaProjectDiagram className="text-blue-400" />} label="Computer Networks" />
+        {/* <SkillBadge icon={<SiJavascript className="text-yellow-500" />} label="DSA" /> */}
+        {/* <SkillBadge icon={<GiBrain className="text-pink-400" />} label="DSA" /> */}
+        <SkillBadge icon={<HiPencilAlt className="text-yellow-600" />} label="DSA" />
+      </div>
+    </div>
 
-          </div>
-        </section>
+    {/* Core & Tools Card */}
+    <div className="skill-card group p-8 bg-[#0a0a0a] border border-white/5 rounded-2xl hover:border-purple-500/50 transition-colors">
+      <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6 text-purple-500 text-2xl">
+        <FaTools />
+      </div>
+      <h3 className="text-xl font-bold mb-6">Core & Tools</h3>
+      <div className="flex flex-wrap gap-3">
+        <SkillBadge icon={<SiGit className="text-orange-500" />} label="Git" />
+        <SkillBadge icon={<SiPostman className="text-orange-400" />} label="Postman" />
+        <SkillBadge icon={<FaCode className="text-cyan-400" />} label="System Design" />
+        <SkillBadge icon={<FaTools className="text-gray-400" />} label="REST APIs" />
+      </div>
+    </div>
+
+  </div>
+</section>
 
         {/* --- RESUME ACTION --- */}
         <motion.section 
