@@ -95,12 +95,6 @@ import gsap from 'gsap';
 
 const projects = [
   {
-    title: "Portfolio",
-    description: "A high-performance personal portfolio website built with modern animations.",
-    tech: ['React', 'Framer Motion', 'GSAP'],
-    link: "https://manan-agarwal-portfolio.vercel.app/",
-  },
-  {
     title: "Connect",
     description: "Real-time chatting application with persistent messaging and secure rooms.",
     tech: ['Socket.io', 'MongoDB', 'React', 'Express'],
@@ -111,6 +105,12 @@ const projects = [
     description: "AI-powered system design visualizer with interactive canvas elements.",
     tech: ['ReactFlow', 'OpenAI', 'MongoDB', 'Node.js'],
     link: "https://system-architect-psi.vercel.app/",
+  },
+  {
+    title: "City Traffic Hotspot Finder",
+    description: "An application that identifies traffic hotspots in a city using real-time data and machine learning.",
+    tech: ['Leaflet.js', 'Google Cloud' , 'Python', 'Flask'],
+    link: "https://traffic-dashboard-621102718973.us-central1.run.app/",
   }
 ];
 
