@@ -8,6 +8,7 @@ import dbms from "../assets/certs/dbms.jpg";
 import cpp from "../assets/certs/cpp.jpg";
 import l1 from "../assets/badges/l1.png";
 import l2 from "../assets/badges/l2.png";
+import l3 from "../assets/badges/l3.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,8 +62,13 @@ function Certifications() {
     },
     {
       name: "100 Days Badge 2025",
-      date: "Current",
+      date: "2025",
       image: l2,
+    },
+    {
+      name: "50 Days Badge 2026",
+      date: "Current",
+      image: l3,
     },
   ];
 
