@@ -1,34 +1,20 @@
 import React, { useEffect, useRef } from "react";
-
 import { NavLink } from "react-router-dom";
-
 import image from "../assets/me.jpg";
-
 import { FaGithub, FaLinkedin, FaInstagram, FaCode, FaRocket, FaDatabase,FaChevronDown } from "react-icons/fa";
-
 import { SiX, SiJavascript, SiReact, SiTailwindcss, SiNodedotjs, SiMongodb,SiExpress, SiGit, SiPostman } from "react-icons/si";
-
 import gsap from "gsap";
-
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import { motion, AnimatePresence } from "framer-motion";
-
-
 
 gsap.registerPlugin(ScrollTrigger);
 
 
 
 function Home() {
-
   const mainContainer = useRef(null);
-
   const heroRef = useRef(null);
-
   const codeBlockRef = useRef(null);
-
-
 
   useEffect(() => {
 
