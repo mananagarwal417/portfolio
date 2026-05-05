@@ -97,7 +97,7 @@ function Contact() {
 
           <div className="flex justify-center items-center gap-8">
             {[
-              { icon: <FaGithub />, link: "https://github.com/agarwal1771" },
+              { icon: <FaGithub />, link: "https://github.com/mananagarwal417" },
               { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/manan-agarwal-5b290a256" },
               { icon: <SiX />, link: "https://x.com/MananAgarwal136" },
               { icon: <FaInstagram />, link: "https://www.instagram.com/manan_agarwal06" }
