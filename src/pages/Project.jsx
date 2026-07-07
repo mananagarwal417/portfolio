@@ -11,19 +11,31 @@ const projects = [
     title: "Connect",
     description: "Real-time chatting application with persistent messaging and secure rooms.",
     tech: ['Socket.io', 'MongoDB', 'React', 'Express'],
-    link: "https://chatting-application-olive.vercel.app/",
+    link: "https://github.com/mananagarwal417/chatting-application",
   },
   {
     title: "SystemCraft",
     description: "AI-powered system design visualizer with interactive canvas elements.",
     tech: ['ReactFlow', 'OpenAI', 'MongoDB', 'Node.js'],
-    link: "https://system-architect-psi.vercel.app/",
+    link: "https://github.com/mananagarwal417/system_architect",
   },
   {
     title: "City Traffic Hotspot Finder",
     description: "An application that identifies traffic hotspots in a city using real-time data and machine learning.",
     tech: ['Leaflet.js', 'Google Cloud' , 'Python', 'Flask'],
     link: "https://traffic-dashboard-621102718973.us-central1.run.app/",
+  }
+  {
+    title: "CPU Scheduling Simulator",
+    description: "An application that simulates CPU scheduling algorithms with real-time visualization.",
+    tech: ['C++','POSIX Threads', 'Mutex Locks','OOPs Concepts'],
+    link: "https://github.com/mananagarwal417/CPU-Scheduling-Project",
+  }
+  {
+    title: "CloudSpend-AI",
+    description: "An AI service where the user can upload the cloud service invoice and can get the cost optimization recommendations.",
+    tech: ['Python', 'FastAPI' , 'MongoDB', 'LangChain', 'React', 'Docker', 'Gemini API'],
+    link: "https://github.com/mananagarwal417/CloudSpend-AI",
   }
 ];
 
