@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
@@ -24,13 +22,13 @@ const projects = [
     description: "An application that identifies traffic hotspots in a city using real-time data and machine learning.",
     tech: ['Leaflet.js', 'Google Cloud' , 'Python', 'Flask'],
     link: "https://traffic-dashboard-621102718973.us-central1.run.app/",
-  }
+  },
   {
     title: "CPU Scheduling Simulator",
     description: "An application that simulates CPU scheduling algorithms with real-time visualization.",
     tech: ['C++','POSIX Threads', 'Mutex Locks','OOPs Concepts'],
     link: "https://github.com/mananagarwal417/CPU-Scheduling-Project",
-  }
+  },
   {
     title: "CloudSpend-AI",
     description: "An AI service where the user can upload the cloud service invoice and can get the cost optimization recommendations.",
